@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<!--form.html-->
+<html>
+    <head>
+        <meta charset = "utf-8">
+        <title>Forms</title>
+        <link rel = "stylesheet" type = "text/css" href = "main.css">
+    </head>
+    <body>
+        <h1>Welcome to INTERNET-PROGRAMMING SHOP</h1><br>
+        <p>
+        <button type = "button" class="navyBtn"  
+            onClick="location.href='login.html'"> 로그인 </button>
+        </p>
+        <p>
+            <button type = "button" class="navyBtn"  
+                onClick="location.href='signup.html'"> 회원가입 </button>
+        </p>
+        <div>
+        <form method = "post" action = "http://www.example.com" >
+            <input type = "hidden" name = "subject"
+                value = "SignUp.html">
+            <p>개인정보 (필수)</p>
+
+            <!--name-->
+            <p><label class = "required">이름:
+                <input name = "name" type = "text" size = "25"
+                    maxlength = "30" autofocus placeholder = "이름을 입력하세요."
+                    autocomplete="on" required>
+            </label></p>
+
+            <!--birthday-->
+            <p><label>생일:
+                <input name = "birthday" type = "date" placeholder = "yyyy-mm-dd">
+            </label></p>
+
+            <!--grade-->
+            <p><label>학년:
+                <input name = "grade" type = "number" min = "1" max = "4" step ="1" > 
+            </label></p>
+
+            <!--phoneNum-->
+            <p><label>전화번호:
+                <input name = "phoneNum" type = "tel" placeholder = "###) ####-####"
+                pattern = "\d{3}\) +\d{4}-\d{4}">
+            </label></p>
+
+            <!--id-->
+            <p><label class = "required">아이디:
+                <input name = "id" type = "text" placeholder = "아이디를 입력하세요." 
+                 autocomplete="on" required>
+            </label></p>
+            
+            <!--password-->
+            <p><label class = "required">비밀번호:
+                <input name = "password" type = "password" placeholder = "비밀번호 입력하세요." required>
+            </label></p>
+            
+            <!--check-->
+            <p><label class = "required">비밀번호 확인:
+                <input name = "passwordCheck" type = "password" placeholder = "비밀번호 확인" required>
+            </label></p>
+
+            <p>
+                <input class = "signup" type = "submit" value = "SignUp">
+                <input class = "cancel" type = "reset" value = "Cancel">
+            </p>
+        </form>
+        </div>
+
+    </body>
+</html>

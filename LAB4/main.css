@@ -1,0 +1,142 @@
+/* main.css */
+/*for login & signup*/
+body { 
+        font-size:12pt; 
+        font-family: Arial, Helvetica, sans-serif; 
+        background-color: white; 
+        text-align : center;
+    }
+
+
+.flex-container{
+    display : flex;
+    width : 1020px;
+    margin : auto;
+    flex-direction : column;
+}
+
+h1 {  
+    font-size:25pt;
+    color : black;
+    text-shadow: 5px 5px 5px rgb(182, 181, 181);  
+    text-align : center;
+    font-family: Pangolin;
+}
+
+p { 
+        font-size:12pt; 
+}
+
+
+
+.required { 
+        color:chocolate 
+    }
+
+.signup {
+        background-color: rgb(165, 216, 216);
+}
+
+.cancel {
+        background-color: rgb(187, 207, 153);
+}
+
+.banner {
+        color:black;
+        font-size: 15px
+}
+
+.inputbox{
+        padding: 5px;
+        background-color: white;
+        width: 250px;
+        height: 350px;
+        text-align: center;
+        margin: auto;
+}
+
+.navyBtn{
+    width : 70px;
+    background-color : rgb(185, 184, 184);
+    border : none;
+    text-align: center;
+    font-size : 12px;
+    margin : 4px;
+    border-radius : 0px;
+}
+
+.navyBtnFocus{
+    width : 70px;
+    background-color : rgb(105, 102, 102);
+    border : none;
+    text-align: center;
+    font-size : 12px;
+    color : white;
+    margin : 4px;
+}
+
+/*for index*/
+.slidingHeader{
+    position : relative;
+    animation : sliding 2s 1 linear;
+}
+
+@keyframes sliding{
+    from{top : 0px; left : 1020px; }
+    to{top : 0px; left : 0px};
+}
+
+img{
+    transform-origin: top left;
+    transition: transform 2s;
+}
+
+img:hover{
+    transform : scale(1.35,1.35);
+
+}
+
+.imgbox{
+    display : flex;
+    border : 3px solid rgb(255, 199, 17);
+    width : 300px;
+    height : 200px;
+    margin : auto;
+    padding : 0;
+    justify-content: center;
+    align-items : center;
+}
+
+.multicolumn{
+    
+    column-count : 2;
+    column-gap : 20px;
+    column-rule-width : 1px;
+    column-rule-style : solid;
+    column-rule-color : rgb(84, 84, 138);
+    column-width : 400px;
+    color : rgb(84, 84, 138);
+    font-size : 12px;
+}
+
+.blue {
+    color : rgb(84, 84, 138);
+}
+
+/*sementic*/
+header {
+    border-bottom: 3px solid black;
+    width: 1020px;
+}
+
+nav{
+    width : 200px;
+    height : 400px;
+}
+section {
+    width : 820px;
+    display : flex;
+    flex-direction :row;
+    border-left : 3px solid black;
+
+}

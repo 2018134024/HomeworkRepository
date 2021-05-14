@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<!--form.html-->
+<html>
+    <head>
+        <meta charset = "utf-8">
+        <title>Forms</title>
+        <link rel = "stylesheet" type = "text/css" href = "main.css">
+        <script>
+            let counter = 0;
+            let selectCounter = 0;
+            let searchCounter = 0;
+            let batch = 30;
+            let i = 0;
+            let selected = false;
+            let searched = false;
+            let cate = 0;
+            let sear = 0;
+
+
+            document.addEventListener('DOMContentLoaded',load);
+            window.onscroll = () => {
+                if (window.innerHeight +window.scrollY >= document.body.offsetHeight){
+                    if(selected){
+                        selectLoad();
+                        selectCounter += 1;
+                    }
+                    else if(searched){
+                        searchLoad();
+                        searchCounter += 1;
+                    }
+                    else{
+                        load();
+                        counter += 1;
+                    }
+                }
+            };
+            function load() {
+                fetch('https://2018134024.github.io/HomeworkRepository/LAB4/product.json')
+                .then(response => {
+                    return response.json();
+                })
+                .then(posts => {
+                    //alert(posts.items[0].title);
+                    posts.items.slice(counter*batch,(counter+1)*batch).forEach(add_post);
+                })
+                .catch(error => console.log('error'));
+            };
+
+            function add_post(comments) {
+                let div1 = document.createElement('div');
+                div1.style.width = "250px";
+                div1.style.height = "225px";
+                div1.style.borderWidth = "10px";
+                div1.style.borderColor = "red";
+                div1.style.margin = "10px";
+                div1.style.padding = "0px";
+                div1.style.backgroundColor = "gray";
+                div1.style.float = "left"
+
+                let image = document.createElement('img');
+                image.src = comments.image;
+                image.alt = comments.image;
+                image.style.width = "150px";
+                image.style.height = "150px";
+                image.style.position = "relative";
+                image.style.top = "10px";
+
+                let butt = document.createElement('button');
+                let text = document.createTextNode("more info");
+                butt.append(text);
+                
+                let info = document.createElement('div');
+                info.style.fontSize = "10pt";
+                info.style.position = "relative";
+                info.style.top = "20px";
+                info.innerHTML = "제품명 : " + comments.title;
+
+                let price = document.createElement('div');
+                price.style.position = "relative";
+                price.style.top = "20px";
+                price.style.fontSize = "10pt";
+                price.innerHTML = "가격 : " + comments.lprice + "₩";
+                
+                butt.addEventListener("click", () =>{
+                    div1.append(info);
+                    div1.append(price);
+                });
+                
+                div1.append(image);
+                div1.append(butt);
+                document.getElementById('posts').append(div1);
+            };
+
+            function select(){
+                cate = document.getElementById("category").value;
+                let len = document.getElementById("posts").getElementsByTagName("div").length;
+                for(let i=0; i<len; ++i){
+                    document.getElementById("posts").getElementsByTagName("div")[0].remove();
+                }
+                counter = 0;
+                selectCounter = 0;
+                if(cate == "모두"){
+                    selected = false;
+                    
+                    load();
+                }
+                else{
+                    selected = true;
+                    
+                    selectLoad();
+                }
+            };
+
+            function selectLoad(){
+                fetch('https://2018134024.github.io/HomeworkRepository/LAB4/product.json')
+                .then(response => {
+                    return response.json();
+                })
+                .then(posts => {
+                    posts.items.slice(selectCounter*batch,(selectCounter+1)*batch).forEach(add_select_post);
+                })
+                .catch(error => console.log('error'));
+            };
+            
+            function add_select_post(comments){
+                if(comments.category3 === cate){
+                    add_post(comments);
+                }
+            };
+
+            function search(){
+                sear = document.getElementById("term").value;
+                let len = document.getElementById("posts").getElementsByTagName("div").length;
+                for(let i=0; i<len; ++i){
+                    document.getElementById("posts").getElementsByTagName("div")[0].remove();
+                }
+                searched = true;
+                searchCounter = 0;
+                counter = 0;
+                searchLoad();
+            };
+
+
+            function searchLoad(){
+                fetch('https://2018134024.github.io/HomeworkRepository/LAB4/product.json')
+                .then(response => {
+                    return response.json();
+                })
+                .then(posts => {
+                    posts.items.slice(searchCounter*batch,(searchCounter+1)*batch).forEach(add_search_post);
+                })
+                .catch(error => console.log('error'));
+            };
+
+            function add_search_post(comments){
+                if(comments.title.search(sear) != -1){
+                    add_post(comments);
+                }
+            };
+
+        </script>
+    </head>
+
+    <body>
+    <div class = "flex-container">
+        <header>
+            <h1 class = "slidingHeader"><br>Beautiful day</h1>
+            <p>
+                <button type = "button" class="navyBtnFocus" 
+                    onClick="location.href='index.html'"> 메인페이지 </button>
+                <button type = "button" class="navyBtn"  
+                    onClick="location.href='login.html'"> 로그인 </button>
+                <button type = "button" class="navyBtn"  
+                    onClick="location.href='signup.html'"> 회원가입 </button>
+            </p>
+        </header>
+        <div class = "flex-container" style= "flex-direction: row">
+            <nav><br><br>
+                <label for = "txtList">Select a category:<br><br>
+                    <select id = "category" onchange = "select()" style = "width:150px">
+                        <option value = "모두">모두</option>
+                        <option value = "재킷">재킷</option>
+                        <option value = "티셔츠">티셔츠</option>
+                        <option value = "바지">바지</option>
+                        <option value = "원피스">원피스</option>
+                        <option value = "트레이닝복">트레이닝복</option>
+                        <option value = "잠옷/홈웨어">잠옷/홈웨어</option>
+                    </select><br><br><br>
+                </label>
+
+                <label>Enter Search Term: <br><br>
+                    <input id = "term" type = "text" size = "20" maxlength="30">
+                </label><br><br>
+
+                <input id="searchButt" type = "button" onclick = "search()" value = "search" >
+
+            </nav>
+            <section >
+                <div id = "posts">
+                </div>
+            </section>
+        </div>
+        
+    </div>
+    </body>
+</html>
+

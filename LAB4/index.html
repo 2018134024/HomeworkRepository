@@ -101,12 +101,12 @@
                 selectCounter = 0;
                 if(cate == "모두"){
                     selected = false;
-                    
+                    searched = false;
                     load();
                 }
                 else{
                     selected = true;
-                    
+                    searched = false;
                     selectLoad();
                 }
             };
@@ -135,6 +135,7 @@
                     document.getElementById("posts").getElementsByTagName("div")[0].remove();
                 }
                 searched = true;
+                selected = false;
                 searchCounter = 0;
                 counter = 0;
                 searchLoad();
